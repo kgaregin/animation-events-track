@@ -8,10 +8,14 @@ class AnimationTrack {
     this.__iteration = options.iteration || false; // The animationiteration event is fired at the start of every new animation iteration, i.e. every iteration except the first.
     this.__end = options.end || false; // The animationend event is fired when the animation ends.
     this.__vendors = options.vendors || ['webkit', 'moz', 'MS', 'o', '']; // array of supporting browser vendor prefixes. Supporting all by default.
+    this.addEvents();
   }
 
   prefixedEventAdd(element, type, callback) {
-    if (!element instanceof Node) return;
+    if (!(element instanceof Node)) { // brackets are mandatory here. Otherwise "!element" evaluates first.
+      if (this.__debug) console.log('element must be Node!');
+      return;
+    }
     for (var v = 0; v < this.__vendors.length; v++) {
       if (!this.__vendors[v]) type = type.toLowerCase();
       element.addEventListener(this.__vendors[v] + type, callback, false);
@@ -34,13 +38,13 @@ class AnimationTrack {
   handleIteration(ev) {
     let name = ev.animationName;
     if (this.__evName && this.__evName != evName) return;
-    if (this.__debug) console.log('animation: start');
+    if (this.__debug) console.log('animation: iteration');
     if (this.__iteration) this.__iteration(ev);
   }
   handleEnd(ev) {
     let name = ev.animationName;
     if (this.__evName && this.__evName != evName) return;
-    if (this.__debug) console.log('animation: start');
+    if (this.__debug) console.log('animation: end');
     if (this.__end) this.__end(ev);
   }
 
