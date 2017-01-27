@@ -11,7 +11,10 @@ class AnimationTrack {
   }
 
   prefixedEventAdd(element, type, callback) {
-    if (!element instanceof Node) return;
+    if (!element instanceof Node){ 
+      if (this.__debug) console.log('element must be Node!')
+      return;
+    }
     for (var v = 0; v < this.__vendors.length; v++) {
       if (!this.__vendors[v]) type = type.toLowerCase();
       element.addEventListener(this.__vendors[v] + type, callback, false);
