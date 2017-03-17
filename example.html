@@ -33,6 +33,15 @@
 			animation-timing-function: linear;
 			animation-fill-mode: forwards;
 		}
+		.animationBox_multiple{
+			position: relative;
+			width: 200px;
+			height: 200px;
+			margin: 50px;
+			left: 50%;
+			background-color: #179800;
+			animation: stretch 1s linear .5s infinite alternate, fadeIn 1s linear .5s infinite alternate;
+		}
 		@keyframes stretch{
 			from{
 				 transform: translate3d(-50%,0,0);
@@ -41,11 +50,20 @@
 				transform: translate3d(-50%,0,0) scale3d(2.5,1,1);
 			}
 		}
+		@keyframes fadeIn{
+			from{
+				 opacity: 0;
+			}
+			to{
+				opacity: 1;
+			}
+		}		
 	</style>
 </head>
 <body>
 	<div class="animationBox_limited"></div>
 	<div class="animationBox_infinite"></div>
+	<div class="animationBox_multiple"></div>
 
 	<script type="text/javascript" src="animationTracker.js"></script>
 
@@ -61,7 +79,6 @@
 		};
 		let trackerLimited = new AnimationTracker({
 			element: document.querySelector('.animationBox_limited'),
-			name: 'stretch',
 			start,
 			iteration,
 			end
@@ -69,8 +86,13 @@
 		let trackerInfinite = new AnimationTracker({
 			element: document.querySelector('.animationBox_infinite'),
 			start,
-			iteration,
-			end			
+			iteration
+		});	
+		let trackerMultiple = new AnimationTracker({
+			element: document.querySelector('.animationBox_multiple'),
+			name: 'fadeIn',
+			start,
+			iteration	
 		});		
 	</script>
 </body>
