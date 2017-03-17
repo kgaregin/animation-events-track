@@ -33,6 +33,6 @@ let options = {
   vendors: ['webkit', 'moz', 'MS', 'o', ''] // [optional] array. in case you don't want supporting all browsers. 
 }
 ```
-
+## additional examples may be found in example.html file (don't forget js!)
 ### Inspired by this article https://www.sitepoint.com/css3-animation-javascript-event-handlers/
 ### Any feedback appreciated!
