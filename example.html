@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Animation Tracker example</title>
+	<style type="text/css">
+		.animationBox_limited{
+			position: relative;
+			width: 200px;
+			height: 200px;
+			margin: 50px;
+			left: 50%;
+			background-color: #0052b7;
+			animation-name: stretch;
+			animation-duration: 1s;
+			animation-delay: .5s;
+			animation-iteration-count: 3;
+			animation-direction: alternate;
+			animation-timing-function: linear;
+			animation-fill-mode: forwards;
+		}
+		.animationBox_infinite{
+			position: relative;
+			width: 200px;
+			height: 200px;
+			margin: 50px;
+			left: 50%;
+			background-color: #980062;
+			animation-name: stretch;
+			animation-duration: 1s;
+			animation-delay: .5s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			animation-timing-function: linear;
+			animation-fill-mode: forwards;
+		}
+		@keyframes stretch{
+			from{
+				 transform: translate3d(-50%,0,0);
+			}
+			to{
+				transform: translate3d(-50%,0,0) scale3d(2.5,1,1);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="animationBox_limited"></div>
+	<div class="animationBox_infinite"></div>
+
+	<script type="text/javascript" src="animationTracker.js"></script>
+
+	<script type="text/javascript">
+		let start = () => {
+			console.log('Animation start: place your event handler code here!');
+		};
+		let iteration = () => {
+			console.log('Animation iteration: place your event handler code here!');
+		};
+		let end = () => {
+			console.log('Animation end: place your event handler code here!');
+		};
+		let trackerLimited = new AnimationTracker({
+			element: document.querySelector('.animationBox_limited'),
+			name: 'stretch',
+			start,
+			iteration,
+			end
+		});
+		let trackerInfinite = new AnimationTracker({
+			element: document.querySelector('.animationBox_infinite'),
+			start,
+			iteration,
+			end			
+		});		
+	</script>
+</body>
+</html>
